@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Battle Royale - Pro Launcher</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="start-screen" class="overlay">
+        <h1>BATTLE ROYALE</h1>
+        <p>البقاء للأقوى - اختر خريطتك وابدأ</p>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+            <input type="text" id="player-name-input" class="name-input" placeholder="اكتب اسمك هنا..." maxlength="15">
+            <select id="map-select" class="name-input" style="width:345px;">
+                <option value="city">خريطة المدينة (city.html)</option>
+                <option value="island">خريطة الجزيرة (island.html)</option>
+                <option value="desert">خريطة الصحراء (desert.html)</option>
+                <option value="night">خريطة الليل (night.html)</option>
+            </select>
+        </div>
+        <button class="btn" onclick="startSelectedGame()">ابدأ اللعب</button>
+        <div id="last-score" style="margin-top:20px; color:#f1c40f; font-weight:bold;"></div>
+    </div>
+
+    <script>
+        // عرض آخر نتيجة
+        const lastKills = localStorage.getItem('lastKills');
+        if (lastKills !== null) {
+            document.getElementById('last-score').innerText = `آخر نتيجة: قتل ${lastKills} أعداء`;
+        }
+
+        function startSelectedGame() {
+            const name = document.getElementById('player-name-input').value || 'لاعب';
+            localStorage.setItem('playerName', name);
+
+            const selectedMap = document.getElementById('map-select').value;
+            // التوجيه إلى ملف الخريطة المستقل
+            window.location.href = selectedMap + ".html";
+        }
+    </script>
+</body>
+
+</html>
